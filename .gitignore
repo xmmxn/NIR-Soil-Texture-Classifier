@@ -1,0 +1,79 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# C extensions
+*.so
+*.pyd
+*.dll
+
+# Distribution / packaging
+.Python
+env/
+build/
+dist/
+egg-info/
+bin/
+include/
+lib/
+lib64/
+libs/
+
+# Local development configuration
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# PyInstaller
+.spec
+
+# Compiled source
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Temporary files
+*~
+*.bak
+*.swp
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# TensorFlow-related files
+*.h5
+*.hdf5
+*.pb
+*.pbtxt
+*.ckpt
+*.ckpt.*
+*.tflite
+saved_model/
+
+# Model training checkpoints
+model_checkpoints/
+
+# TensorBoard log files
+logs/
+
+# TensorFlow-related files
+*.h5
+*.hdf5
+*.pb
+*.pbtxt
+*.ckpt
+*.ckpt.*
+*.tflite
+saved_model/

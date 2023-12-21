@@ -1,0 +1,20 @@
+A	*idn?	1	-	16	 	5	 
+B	*vers?	1	-	16	 	5	 
+C	*para:spnum	1	1	16	5	 	 
+D	*para:pixel	1	 	16	5	 	 
+E	*para:sdel	1	1	16	5	0	60000
+F	*para:fit0	1	1	16	5	 	 
+G	*para:fit1	2	1	16	5	 	 
+H	*para:fit2	2	1	16	5	 	 
+I	*para:fit3	2	1	16	5	 	 
+J	*para:fit4	2	1	16	5	 	 
+K	*para:tint	1	1	16	5	0.01	65000
+L	*para:pdag	1	1	16	5	0	1
+M	*para:gain	1	1	16	5	1	5
+N	*para:ovsamp	1	1	16	 	1	32
+O	*para:pixbin	1	1	16	 	1	10
+P	*para:offs	1	1	16	5	-300	300
+Q	*para:adcr	1	1	16	5	1	16
+R	*para:lampp	1	1	16	5	0	1
+S	*para:lampe	1	1	16	5	0	1
+T	*para:save	1	1	16	5	0	1
