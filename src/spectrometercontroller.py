@@ -3,8 +3,9 @@ import math
 
 
 class SpectrometerController:
-    def __init__(self, dll_path):
-        self.dll = ctypes.WinDLL(dll_path)
+    def __init__(self):
+        self.dll = ctypes.WinDLL(
+            r"C:\\Users\\pacom\\Documents\\DLL\\SPECcon.dll")
 
         # Define the function prototypes
         self.SPEC_Identify = ctypes.WINFUNCTYPE(
@@ -74,17 +75,25 @@ class SpectrometerController:
     def measure_dark(self):
         ret = self.DLL_measure_spectrometer(self.port, 15, 14, self.integration_time, self.averages, self.x_dark, self.y_dark,
                                             self.timeout)
+        dark = []
         print("\nDARK")
         for i in range(self.wave_start, self.wave_end + 1):
-            print(self.x_dark[i], "\t", self.y_dark[i])
+            # print(self.x_dark[i], "\t", self.y_dark[i])
+            # print(self.y_dark[i])
+            dark.append(self.y_dark[i])
+        return dark
 
     def measure_reference(self):
 
         ret = self.DLL_measure_spectrometer(self.port, 16, 14, self.integration_time, self.averages, self.x_ref,
                                             self.y_ref, self.timeout)
+        light = []
         print("\nREFERENCE")
         for i in range(self.wave_start, self.wave_end + 1):
-            print(self.x_ref[i], "\t", self.y_ref[i])
+            # print(self.x_ref[i], "\t", self.y_ref[i])
+            # print(self.y_ref[i])
+            light.append(self.y_ref[i])
+        return light
 
     def measure_sample(self):
 
@@ -92,6 +101,7 @@ class SpectrometerController:
                                             self.y_ref, self.timeout)
         print("\nSAMPLE")
         for i in range(self.wave_start, self.wave_end + 1):
+            # print(self.x_ref[i], "\t", self.y_ref[i])
             print(self.x_ref[i], "\t", self.y_ref[i])
         self.sample_measurement = list(
             self.y_ref[self.wave_start:self.wave_end + 1])
@@ -101,14 +111,13 @@ class SpectrometerController:
         ctypes.windll.kernel32.FreeLibrary(self.dll._handle)
 
 
-if __name__ == "__main__":
-    controller = SpectrometerController(
-        r"C:\\Users\\pacom\\Documents\\DLL\\SPECcon.dll")
-    controller.load_functions()
-    controller.identify_spectrometer()
-    controller.connect_spectrometer()
-    controller.get_information()
-    controller.measure_dark()
-    controller.measure_reference()
-    controller.measure_sample()
-    controller.disconnect_spectrometer()
+# if __name__ == "__main__":
+#     controller = SpectrometerController()
+#     controller.load_functions()
+#     controller.identify_spectrometer()
+#     controller.connect_spectrometer()
+#     controller.get_information()
+#     controller.measure_dark()
+#     controller.measure_reference()
+#     controller.measure_sample()
+#     controller.disconnect_spectrometer()
