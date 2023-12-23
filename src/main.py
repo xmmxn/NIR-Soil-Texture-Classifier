@@ -8,7 +8,7 @@ class SoilTextureClassifier:
         self.root = root
         self.controller = arduino_controller
         self.root.geometry("1280x720")
-        self.root.title("Tkinter OOP GUI Example")
+        self.root.title("NIR Soil Tecture Characterization")
 
         # Add widgets or perform other actions as needed
         self.label = tk.Label(root, text="Hello, Tkinter!",
