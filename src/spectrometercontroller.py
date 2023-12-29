@@ -83,7 +83,7 @@ class SpectrometerController:
             dark.append(self.y_dark[i])
         return dark
 
-    def measure_reference(self):
+    def measure_light(self):
 
         ret = self.DLL_measure_spectrometer(self.port, 16, 14, self.integration_time, self.averages, self.x_ref,
                                             self.y_ref, self.timeout)
@@ -99,12 +99,13 @@ class SpectrometerController:
 
         ret = self.DLL_measure_spectrometer(self.port, 17, 14, self.integration_time, self.averages, self.x_ref,
                                             self.y_ref, self.timeout)
+        sample = []
         print("\nSAMPLE")
         for i in range(self.wave_start, self.wave_end + 1):
             # print(self.x_ref[i], "\t", self.y_ref[i])
-            print(self.x_ref[i], "\t", self.y_ref[i])
-        self.sample_measurement = list(
-            self.y_ref[self.wave_start:self.wave_end + 1])
+            # print(self.x_ref[i], "\t", self.y_ref[i])
+            sample.append(self.y_ref[i])
+        return sample
 
     def disconnect_spectrometer(self):
         ret = self.DLL_disconnect_spectrometer(self.port)

@@ -1,4 +1,5 @@
 import tkinter as tk
+import math
 from spectrometercontroller import SpectrometerController
 from arduinocontroller import ArduinoController
 
@@ -20,6 +21,11 @@ class SoilTextureClassifier:
         self.con_spec.identify_spectrometer()
         self.con_spec.connect_spectrometer()
         self.con_spec.get_information()
+
+        self.dark_ref = []
+        self.light_ref = []
+        self.sample = []
+        self.abs_unit = [0] * 116
 
         # Button for Dark Reference
         self.dark_button = tk.Button(root, text="Dark Reference",
@@ -51,19 +57,25 @@ class SoilTextureClassifier:
     # Dark callibration function
     def dark_callib(self):
         dark = self.con_spec.measure_dark()
-        print(dark)
+        self.dark_ref = dark
+        print(self.dark_ref)
         return
 
     # Light callibration function
     def light_callib(self):
-        light = self.con_spec.measure_reference()
-        print(light)
+        light = self.con_spec.measure_light()
+        self.light_ref = light
+        print(self.light_ref)
         return
 
     # Start calculating absorbance unit of soil sample
     # The value from this function shall be plotted for visualization
     def start_sample(self):
-        self.con_spec.measure_sample()
+        sample = self.con_spec.measure_sample()
+        for i in range(116):
+            self.abs_unit[i] = round(-math.log10(sample[i] /
+                                     self.light_ref[i]), 4)
+        print(self.abs_unit)
         return
 
     # Classifying soil sample based from the AU
@@ -74,6 +86,7 @@ class SoilTextureClassifier:
 if __name__ == "__main__":
     try:
         arduino_controller = ArduinoController()
+        # spec_controller = SpectrometerController()
         # Create the main window
         root = tk.Tk()
 
