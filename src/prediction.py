@@ -1,70 +1,18 @@
 # Import necessary libraries
-# from sklearn.cross_decomposition import PLSRegression
-# import joblib
+import numpy as np
+from sklearn.cross_decomposition import PLSRegression
+import joblib
 
 
 # Load the PLS model from the file
-# loaded_pls_model = joblib.load(
-#     'C:\\Users\\pacom\\Desktop\\NIR_Soil_Texture_Classifier\\model\\saved_model\\silt_model.joblib')
+loaded_pls_model = joblib.load(
+    'C:\\Users\\pacom\\Desktop\\NIR_Soil_Texture_Classifier\\model\\saved_model\\clay_model.joblib')
 
-# # Assuming you have new data for prediction, replace X_new with your actual data
-# X_new = [0.2935, 0.2932, 0.2934, 0.295, 0.3022, 0.3175, 0.3376, 0.347, 0.3487, 0.3458, 0.3402, 0.3319, 0.323, 0.3133, 0.3043, 0.2958, 0.2869, 0.2787, 0.2712, 0.2655, 0.2611, 0.2596, 0.2602, 0.2636, 0.2692, 0.2764, 0.2896, 0.3188, 0.3712, 0.4314, 0.4769, 0.5013, 0.5138, 0.5244, 0.5346, 0.5408, 0.5445, 0.5439, 0.5334, 0.5173, 0.5028, 0.4922, 0.4849, 0.4824, 0.4833, 0.488, 0.4971, 0.5102, 0.5293, 0.5557, 0.589, 0.6272, 0.6674, 0.7066, 0.742, 0.7759, 0.8157, 0.8733, 0.9577, 1.052, 1.1269, 1.1743, 1.2015,
-#          1.215, 1.2237, 1.2291, 1.2292, 1.2318, 1.2262, 1.2156, 1.209, 1.1964, 7, 1.2291, 1.2292, 1.2318, 1.2262, 1.2156, 1.209, 1.1964, 1.1816, 1.1676, 1.1521, 1.1318, 1.114, 1.0959, 1.0758, 1.0585, 1.0417, 1.0248, 1.0078, 0.9919, 0.9781, 0.9621, 0.9479, 0.9354, 0.9254, 0.914, 0.9044, 0.8945, 0.8855, 0.8784, 0.8696, 0.8435, 0.7917, 0.7278, 0.6684, 0.6261, 0.5947, 0.5666, 0.5378, 0.5187, 0.5019, 0.4891, 0.4777, 0.4676, 0.4609, 0.4548, 0.4508, 0.4443, 0.4426, 0.438, 0.4322, 0.4231]  # Your new data for prediction
+sample = [0.552385702, 0.5518839928, 0.5525081566, 0.5547745853, 0.5545842974, 0.5543045035, 0.5544073801, 0.5541919173, 0.5548112658, 0.5541925357, 0.5533055308, 0.5530985612, 0.5521724352, 0.5514796277, 0.5507753537, 0.5504953729, 0.5499655879, 0.5498005225, 0.5492967735, 0.5491179303, 0.5486676286, 0.5483874725, 0.5483743255, 0.5483475142, 0.5485671641, 0.5482018885, 0.5475549654, 0.546319414, 0.5448249377, 0.543132808, 0.5405077952, 0.5352497342, 0.5313984767, 0.5297068763, 0.5290316949, 0.5282506327, 0.5307980363, 0.5350348398, 0.5383579108, 0.5410935665, 0.5438895549, 0.5450305933, 0.5455399311, 0.5464073685, 0.546257026, 0.5468633537, 0.5478517705, 0.5483527327, 0.5491819376, 0.5501767606, 0.5502948954, 0.5505153294, 0.5513056429, 0.5507878374, 0.5508672866, 0.5515964774, 0.5524005692, 0.5567044392,
+          0.5657362669, 0.5746355703, 0.583726658, 0.5947526324, 0.59644035, 0.5912279295, 0.5880791202, 0.5854222545, 0.5831608823, 0.581966266, 0.580280217, 0.5772571599, 0.5742813293, 0.5718465262, 0.5692036007, 0.5672009508, 0.5646932599, 0.5624311968, 0.5607630959, 0.559556865, 0.5579934948, 0.5569702124, 0.5556200309, 0.5542218333, 0.5531525723, 0.5523533497, 0.5510494404, 0.5498517437, 0.5490695716, 0.5472089527, 0.5455690636, 0.544485941, 0.5426780636, 0.5376734088, 0.5315030474, 0.5261538531, 0.5193691787, 0.5116179088, 0.4994638604, 0.4899893798, 0.4861189124, 0.4956398507, 0.5123382625, 0.5204815295, 0.5257837359, 0.5320812352, 0.5344166587, 0.5400139241, 0.541442314, 0.5413739012, 0.5418662932, 0.5418265195, 0.5447805867, 0.5440680444, 0.5461022143, 0.5462522626, 0.5472307457, 0.5450385352]
+print(len(sample))
 
-# # Make predictions using the loaded model
-# predictions = loaded_pls_model.predict(X_new)
+reshaped_sample = np.array(sample).reshape(1, -1)
 
-# # Print or use the predictions as needed
-# print(predictions)
-
-
-import subprocess
-import sys
-import os
-
-
-def activate_virtual_environment(env_path):
-    """
-    Activate a virtual environment.
-
-    Parameters:
-    - env_path (str): Path to the virtual environment.
-
-    Returns:
-    - None
-    """
-    if sys.platform.startswith('win'):  # Check if running on Windows
-        activate_script = os.path.join(env_path, 'Scripts', 'activate')
-        activate_cmd = f'call "{activate_script}"'
-    else:
-        activate_script = os.path.join(env_path, 'bin', 'activate')
-        activate_cmd = f'source "{activate_script}"'
-
-    # Activate the virtual environment using subprocess
-    subprocess.run(activate_cmd, shell=True)
-
-
-# Example usage:
-env32_path = './env32'
-env64_path = './env64'
-
-# Activate 32-bit environment
-# activate_virtual_environment(env32_path)
-
-# Your code that requires 32-bit Python
-# ...
-
-# Manually reset environment variables (for both Windows and Unix-like systems)
-for var in ('VIRTUAL_ENV', 'PATH'):
-    os.environ.pop(var, None)
-
-# Activate 64-bit environment
-activate_virtual_environment(env64_path)
-
-print(sys.version)
-# Your code that requires 64-bit Python
-# ...
-
-# Manually reset environment variables (for both Windows and Unix-like systems)
-for var in ('VIRTUAL_ENV', 'PATH'):
-    os.environ.pop(var, None)
+predictions = loaded_pls_model.predict(reshaped_sample)
+print(predictions)
