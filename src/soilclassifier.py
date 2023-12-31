@@ -7,7 +7,6 @@ class SoilClassifier:
         self.clay = clay
 
     def classify_soil(self):
-        # Soil classification based on the provided criteria
         if (7 <= self.clay <= 20 and self.sand > 52 and (self.silt + 2 * self.clay) >= 30):
             print("Soil Type: Sandy Loam")
         elif 70 <= self.sand <= 91 and (self.silt + 1.5 * self.clay) >= 15 and (self.silt + 2 * self.clay) < 30:
