@@ -9,43 +9,43 @@ class SoilClassifier:
     def classify_soil(self):
         if (7 <= self.clay <= 20 and self.sand > 52 and (self.silt + 2 * self.clay) >= 30):
             # print("Soil Type: Sandy Loam")
-            return "Sandly Loam"
+            return "SANDLY LOAM"
         elif 70 <= self.sand <= 91 and (self.silt + 1.5 * self.clay) >= 15 and (self.silt + 2 * self.clay) < 30:
             # print("Soil Type: Loamy Sand")
-            return "Loamy Sand"
+            return "LOAMY SAND"
         elif self.sand > 85 and (self.silt + 1.5 * self.clay) < 15:
             # print("Soil Type: Sand")
-            return "Sand"
+            return "SAND"
         elif 7 <= self.clay <= 27 and 28 <= self.silt <= 50 and self.sand <= 52:
             # print("Soil Type: Loam")
-            return "Loam"
+            return "LOAM"
         elif (50 <= self.silt <= 80 and 12 <= self.clay <= 27) or (50 <= self.silt <= 80 and self.clay < 12):
             # print("Soil Type: Silt Loam")
-            return "Silt Loam"
+            return "SILTY LOAM"
         elif self.silt >= 80 and self.clay < 12:
             # print("Soil Type: Silt")
-            return "Silt"
+            return "SILT"
         elif 20 <= self.clay <= 35 and self.silt < 28 and self.sand > 45:
             # print("Soil Type: Sandy Clay Loam")
-            return "Sandy Clay Loam"
+            return "SANDY CLAY LOAM"
         elif 27 <= self.clay <= 40 and 20 < self.sand <= 46:
             # print("Soil Type: Clay Loam")
-            return "Clay Loam"
+            return "CLAY LOAM"
         elif 27 <= self.clay <= 40 and self.sand <= 20:
             # print("Soil Type: Silty Clay Loam")
-            return "Silty Clay Loam"
+            return "SILTY CLAY LOAM"
         elif self.clay >= 35 and self.sand >= 45:
             # print("Soil Type: Sandy Clay")
-            return "Sandy Clay"
+            return "SANDY CLAY"
         elif self.clay >= 40 and self.silt >= 40:
             # print("Soil Type: Silty Clay")
-            return "Silty Clay"
+            return "SILTY CLAY"
         elif self.clay >= 40 and self.sand <= 45 and self.silt < 40:
             # print("Soil Type: Clay")
-            return "Clay"
+            return "CLAY"
         else:
             # print("Soil Type: Unclassified")
-            return "Unclassified"
+            return "UNCLASSIFIED"
 
 
 # def main():

@@ -79,7 +79,7 @@ class SpectrometerController:
         print("\nDARK")
         for i in range(self.wave_start, self.wave_end + 1):
             # print(self.x_dark[i], "\t", self.y_dark[i])
-            # print(self.y_dark[i])
+            # print(self.x_dark[i])
             dark.append(self.y_dark[i])
         return dark
 
@@ -110,15 +110,3 @@ class SpectrometerController:
     def disconnect_spectrometer(self):
         ret = self.DLL_disconnect_spectrometer(self.port)
         ctypes.windll.kernel32.FreeLibrary(self.dll._handle)
-
-
-# if __name__ == "__main__":
-#     controller = SpectrometerController()
-#     controller.load_functions()
-#     controller.identify_spectrometer()
-#     controller.connect_spectrometer()
-#     controller.get_information()
-#     controller.measure_dark()
-#     controller.measure_reference()
-#     controller.measure_sample()
-#     controller.disconnect_spectrometer()
