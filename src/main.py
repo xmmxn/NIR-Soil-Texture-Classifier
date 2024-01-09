@@ -143,10 +143,7 @@ class SoilTextureClassifier:
     def dark_calib(self):
         dark = self.con_spec.measure_dark()
         self.dark_status = True
-        self.dark_ref = dark  # Might remove this
         self.y_values = dark
-        print(self.dark_ref)  # Debugging
-        return
         return
 
     def light_calib(self):
@@ -165,28 +162,29 @@ class SoilTextureClassifier:
     def start_sample(self):
         if self.dark_status == True and self.light_status == True:
             sample = self.con_spec.measure_sample()
+            reference = [0] * 116
+            for j in range(116):
+                reference[j] = self.light_ref[j] - self.dark_ref[j]
             for i in range(116):
                 self.abs_unit[i] = round(-math.log10(sample[i] /
-                                                     self.light_ref[i]), 4)
+                                                     reference[i]), 4)
             self.y_values = self.abs_unit
-            print(self.abs_unit)  # Debugging
             predict = PredictionModels(self.abs_unit)
-            silt_percent = predict.predict_silt()
-            clay_percent = predict.predict_clay()
             sand_percent = predict.predict_sand()
+            clay_percent = predict.predict_clay()
+            silt_percent = predict.predict_silt()
             # Debugging
             print(sand_percent)
-            print(silt_percent)
             print(clay_percent)
+            print(silt_percent)
 
             classifier = SoilClassifier(
                 sand_percent, silt_percent, clay_percent)
             classify = classifier.classify_soil()
             self.classified_soil = classify
-            print(classify)  # Debugging
-            self.canvas_window.silt_value.config(text=predict.predict_silt())
-            self.canvas_window.clay_value.config(text=predict.predict_clay())
-            self.canvas_window.sand_value.config(text=predict.predict_sand())
+            self.canvas_window.sand_value.config(text=sand_percent)
+            self.canvas_window.clay_value.config(text=clay_percent)
+            self.canvas_window.silt_value.config(text=silt_percent)
             self.canvas_window.texture_text.config(
                 text=classifier.classify_soil())
         else:
@@ -199,7 +197,6 @@ class SoilTextureClassifier:
         self.fig = Figure(figsize=(5, 4), dpi=100)
 
         self.subplot = self.fig.add_subplot(111)
-        # self.subplot.set_facecolor('#EEF5E8')
         self.subplot.set_xlabel('Wavelength')
         self.subplot.plot(self.x_values, self.y_values)
 
@@ -210,15 +207,11 @@ class SoilTextureClassifier:
         update_interval = 1000
         self.animation = animation.FuncAnimation(
             self.fig, self.update_plot, interval=update_interval)
-        # self.fig.tight_layout()
 
     def update_plot(self, i):
         self.subplot.clear()
-        # self.subplot.set_facecolor('#EEF5E8')
         self.subplot.set_xlabel('Wavelength')
         self.subplot.plot(self.x_values, self.y_values)
-
-        # self.fig.tight_layout()
 
     def warning_msg(self, title, message):
         messagebox.showwarning(title=title, message=message)

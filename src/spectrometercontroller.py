@@ -37,7 +37,7 @@ class SpectrometerController:
         self.y_ref = (ctypes.c_double * self.pixel_count)()
         self.integration_time = 10
         self.averages = 10
-        self.timeout = 100
+        self.timeout = 10
         self.wave_start = 8
         self.wave_end = 123
 
@@ -78,8 +78,6 @@ class SpectrometerController:
         dark = []
         print("\nDARK")
         for i in range(self.wave_start, self.wave_end + 1):
-            # print(self.x_dark[i], "\t", self.y_dark[i])
-            # print(self.x_dark[i])
             dark.append(self.y_dark[i])
         return dark
 
@@ -90,8 +88,6 @@ class SpectrometerController:
         light = []
         print("\nREFERENCE")
         for i in range(self.wave_start, self.wave_end + 1):
-            # print(self.x_ref[i], "\t", self.y_ref[i])
-            # print(self.y_ref[i])
             light.append(self.y_ref[i])
         return light
 
@@ -102,8 +98,6 @@ class SpectrometerController:
         sample = []
         print("\nSAMPLE")
         for i in range(self.wave_start, self.wave_end + 1):
-            # print(self.x_ref[i], "\t", self.y_ref[i])
-            # print(self.x_ref[i], "\t", self.y_ref[i])
             sample.append(self.y_ref[i])
         return sample
 
